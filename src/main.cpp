@@ -76,6 +76,25 @@ int main(int argc, char *argv[]) {
     cout << "randomNum: " << randomNum << endl;
     cout << "dimension: " << D << endl;
 
+// ================================
+// Dimension consistency check
+// ================================
+    unsigned inputDimension = costNum + randomNum;
+    if (D != inputDimension) {
+        cerr << "==============================================" << endl;
+        cerr << " ERROR: Dimension mismatch!" << endl;
+        cerr << " ---------------------------------------------" << endl;
+        cerr << " const int D in src/common.hpp = " << D << endl;
+        cerr << " But costNum + randomNum       = " << inputDimension << endl;
+        cerr << endl;
+        cerr << " Please modify src/common.hpp line 58:" << endl;
+        cerr << "     const int D = " << inputDimension << ";" << endl;
+        cerr << " Then recompile the program." << endl;
+        cerr << "==============================================" << endl;
+        exit(1);
+    }
+
+
     vector<double> weight;
     for (int i = 7; i != argc; ++i) {
         weight.emplace_back(stod(argv[i]));
